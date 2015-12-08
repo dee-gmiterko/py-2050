@@ -1,10 +1,8 @@
 class Space():
     
-    seed = None
-    blocksLayers = {}
-    
     def __init__(self, seed):
         self.seed = seed
+        self.blocksLayers = {}
     
     def getBlockLayer(self, x, y):
         key = str(x)+','+str(y)

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 from PIL import Image
 from Space import Space
 import layers

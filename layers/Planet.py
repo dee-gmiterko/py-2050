@@ -1,8 +1,6 @@
 import math
 
 class Planet():
-    position = None
-    size = None
     
     def __init__(self, x, y, size):
         self.position = (x, y)
