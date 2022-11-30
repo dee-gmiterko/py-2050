@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from PIL import Image
-from Space import Space
+from layers.Space import Space
 import layers
 
 WIDTH = 1920
@@ -87,20 +87,20 @@ if MAX_LAYERS and requiredLayersCount > MAX_LAYERS:
     requiredLayersCount = MAX_LAYERS
 
 allSuccess = False
-range = 0
+size = 0
 while not allSuccess:
     allSuccess = True
-    range += 1
-    for layerIndex in xrange(0, requiredLayersCount):
+    size += 1
+    for layerIndex in range(0, requiredLayersCount):
         layer = usedLayers[layerIndex]
-        for x in xrange(-1 * range, range):
-            for y in xrange(-1 * range, range):
+        for x in range(-1 * size, size):
+            for y in range(-1 * size, size):
                 layer.generate(space, x, y, random.random)
 
     w = int(WIDTH / 2 / ZOOM) + 1
     h = int(HEIGHT / 2 / ZOOM) + 1
-    for x in xrange(-1 * w, w):
-        for y in xrange(-1 * h, h):
+    for x in range(-1 * w, w):
+        for y in range(-1 * h, h):
             if space.getBlockLayer(x, y) < requiredLayersCount:
                 allSuccess = False
 
@@ -114,12 +114,12 @@ while not allSuccess:
             scalar = True
         #zoom
         coords = [x * ZOOM for x in coords]
-        
+
         #offset
         if len(coords) == 2:
             coords[0] += WIDTH / 2
             coords[1] += HEIGHT / 2
-        
+
         #round
         coords = [int(x) for x in coords]
 
@@ -134,10 +134,10 @@ while not allSuccess:
         for layer in usedLayers:
             layer.render(space, im, transition)
             if RENDER_PER_LAYER:
-                saveImage(im, range, li)
+                saveImage(im, size, li)
                 li += 1
         if not RENDER_PER_LAYER:
-            saveImage(im, range, None)
+            saveImage(im, size, None)
 
 if not RENDER_PER_STEP:
     li = 0
